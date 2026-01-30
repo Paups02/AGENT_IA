@@ -20,7 +20,7 @@ from ..cultius import TipusCultiu, NOMS_CULTIUS, obtenir_info_cultiu
 from ..api_clients import OpenWeatherClient, HydrologyClient, AgrometeoClient
 from ..engine import IrrigationEngine, DecisionEngine
 from ..engine.decision import TipusRecomanacio, Recomanacio, AnalisiRisc
-from ..visualization import ChartGenerator, ImageGenerator
+from ..visualization import ChartGenerator
 from ..reports import ReportGenerator
 
 
@@ -77,7 +77,8 @@ PERSONALITAT:
         self.irrigation_engine: Optional[IrrigationEngine] = None
         self.decision_engine = DecisionEngine()
         self.chart_generator = ChartGenerator()
-        self.image_generator = ImageGenerator()
+        # ImageGenerator és opcional - no el carregarà si hi ha problemes de dependències
+        self.image_generator = None
         self.report_generator = ReportGenerator()
 
         # Definir les eines disponibles

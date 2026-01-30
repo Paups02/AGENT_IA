@@ -8,6 +8,19 @@ Inclou:
 """
 
 from .charts import ChartGenerator
-from .images import ImageGenerator
 
-__all__ = ["ChartGenerator", "ImageGenerator"]
+# ImageGenerator es carrega sota demanda per evitar problemes de dependències
+ImageGenerator = None
+
+def get_image_generator():
+    """Obté ImageGenerator si està disponible."""
+    global ImageGenerator
+    if ImageGenerator is None:
+        try:
+            from .images import ImageGenerator as _ImageGenerator
+            ImageGenerator = _ImageGenerator
+        except Exception:
+            pass
+    return ImageGenerator
+
+__all__ = ["ChartGenerator", "ImageGenerator", "get_image_generator"]
